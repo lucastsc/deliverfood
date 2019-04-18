@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "290618264181",
+    "firebase_url": "https://deliverfood-eb49f.firebaseio.com",
+    "project_id": "deliverfood-eb49f",
+    "storage_bucket": "deliverfood-eb49f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290618264181:android:27150005a58ea53a",
+        "android_client_info": {
+          "package_name": "br.com.tadeu.deliverfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290618264181-alu4j80d6rmhq2l6chmuo0at9ik27dmk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.tadeu.deliverfood",
+            "certificate_hash": "1dcc8d62712554b38b8cb9d323ab423dc9cee964"
+          }
+        },
+        {
+          "client_id": "290618264181-3u49a0412gfpfa28hgr983jooa9s45cl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn1Sd_6K3-RE9bu7zWnpptRZaPmLCFA8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290618264181-3u49a0412gfpfa28hgr983jooa9s45cl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
