@@ -41,26 +41,44 @@ Widget foodCard(String foodName, String foodDescription){
   return Card(
 
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisSize: MainAxisSize.max,
 
         children: <Widget>[
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,//make text alignment from start
-            children: <Widget>[
-              Text(foodName),
-              Text(foodDescription)
-            ],
+          Padding(
+            padding: EdgeInsets.all(40.0),
           ),
 
-          RaisedButton(
-            color: Colors.lightBlue,
-            child: Text("Order"),
-            onPressed: (){
-              print(foodName);
-            },
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+
+                Expanded(//inserted expanded because if the description is too long, it breaks the line
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,//make text alignment from start
+                    children: <Widget>[
+                      Text(foodName,style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text(foodDescription)
+                    ],
+                  ),
+                ),
+
+                RaisedButton(
+                  color: Colors.lightBlue,
+                  child: Text("Order"),
+                  onPressed: (){
+                    print(foodName);
+                  },
+                ),
+
+              ],
+            ),
           )
+
+
         ],
       )
   );
