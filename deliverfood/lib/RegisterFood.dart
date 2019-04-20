@@ -24,7 +24,6 @@ class _RegisterFoodState extends State<RegisterFood> {
             icon: Icon(Icons.list),
             onPressed: (){
               //Navigator.push(context, MaterialPageRoute(builder: (context) => RegisteredFoodsList()));
-              print("APERTOU");
               Navigator.push(context, MaterialPageRoute(builder: (context) => RegisteredFoodsList()));
             },
           )

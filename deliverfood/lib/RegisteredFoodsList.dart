@@ -24,10 +24,7 @@ class _RegisteredFoodsListState extends State<RegisteredFoodsList> {
             default:
               return new ListView(
                 children: snapshot.data.documents.map((DocumentSnapshot document) {
-                  return new ListTile(
-                    title: new Text(document['name']),
-                    subtitle: new Text(document['description'].toString()),
-                  );
+                  return foodCard(document['name'],document['description']);
                 }).toList(),
               );
           }
@@ -36,4 +33,36 @@ class _RegisteredFoodsListState extends State<RegisteredFoodsList> {
 
     );
   }
+
+
 }
+
+Widget foodCard(String foodName, String foodDescription){
+  return Card(
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+
+        children: <Widget>[
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,//make text alignment from start
+            children: <Widget>[
+              Text(foodName),
+              Text(foodDescription)
+            ],
+          ),
+
+          RaisedButton(
+            color: Colors.lightBlue,
+            child: Text("Order"),
+            onPressed: (){
+              print(foodName);
+            },
+          )
+        ],
+      )
+  );
+}
+
