@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'RegisterFood.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,9 +23,10 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             RaisedButton(
               color: Colors.blue,
-              child: Text("Firebase"),
+              child: Text("Register Food"),
               onPressed: (){
-                Firestore.instance.collection("teste2").document("teste2").setData({"teste1":"teste2"});
+                //Firestore.instance.collection("users").document("novapessoa").setData({"nome":"Joao","idade":"30"});
+                Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterFood()));
               },
             )
           ],
