@@ -46,7 +46,7 @@ class _RegisterFoodState extends State<RegisterFood> {
               controller: foodDescriptionController,
               decoration: InputDecoration(
                 labelText: "Description",
-                hintText: "Enter the food's description"
+                hintText: "Enter food's description"
               ),
             ),
 
