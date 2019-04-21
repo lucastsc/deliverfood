@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'RegisterFood.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'SignUp.dart';
+import 'SignIn.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -19,12 +20,21 @@ class _HomePageState extends State<HomePage> {
         title: Text("Deliverfood"),
         backgroundColor: Colors.lightBlue,
         actions: <Widget>[
+
+          IconButton(
+            icon: Icon(Icons.person_outline),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
+            },
+          ),
+
           IconButton(
             icon: Icon(Icons.person_add),
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
             },
-          )
+          ),
+
         ],
       ),
       body: Container(

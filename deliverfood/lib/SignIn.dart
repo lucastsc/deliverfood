@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'helper/firebaseHelper.dart';
 
-class SignUp extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
-  _SignUpState createState() => _SignUpState();
+  _SignInState createState() => _SignInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignInState extends State<SignIn> {
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -15,7 +15,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SignUp"),
+        title: Text("SignIn"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.clear),
@@ -51,11 +51,10 @@ class _SignUpState extends State<SignUp> {
               color: Colors.blue,
               child: Text("Sign Up"),
               onPressed: (){
-                firebaseHelper().signUpWithEmail(context,emailController.text, passwordController.text);
+                firebaseHelper().signInWithEmail(context,emailController.text, passwordController.text);
               },
             ),
           ],
-
         ),
       ),
     );
