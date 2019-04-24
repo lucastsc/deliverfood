@@ -4,6 +4,8 @@ import 'RegisterFood.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'SignUp.dart';
 import 'SignIn.dart';
+import 'helper/firebaseHelper.dart';
+import 'helper/helpFunctions.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -46,7 +48,27 @@ class _HomePageState extends State<HomePage> {
               child: Text("Register Food"),
               onPressed: (){
                 //Firestore.instance.collection("users").document("novapessoa").setData({"nome":"Joao","idade":"30"});
-                Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterFood()));
+
+                firebaseHelper().getCurrentUser().then((result){//gets the current logged user
+
+                  if(result != null){//if there is a logged in user, then
+                    print("There is a logged in user with uid: " + result);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterFood()));
+                  }else{
+                    print("You need to log in first");
+                  }
+
+
+                });
+
+              },
+            ),
+
+            RaisedButton(
+              color: Colors.lightBlue,
+              child: Text("SignOut"),
+              onPressed: (){
+                firebaseHelper().signUserOut();
               },
             )
           ],

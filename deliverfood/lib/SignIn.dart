@@ -1,3 +1,4 @@
+import 'package:deliverfood/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'helper/firebaseHelper.dart';
 
@@ -52,6 +53,7 @@ class _SignInState extends State<SignIn> {
               child: Text("Sign In"),
               onPressed: (){
                 firebaseHelper().signInWithEmail(context,emailController.text, passwordController.text);
+
               },
             ),
           ],

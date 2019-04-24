@@ -1,3 +1,4 @@
+import 'package:deliverfood/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'helpFunctions.dart';
@@ -41,6 +42,8 @@ void signInWithEmail(BuildContext context,String email, String password) async{
     if(user != null){
       //sign in successfull
       //ex: bring the user to the home page
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
       helpFunctions().myShowDialog(context, "Alert", "Signing In Successfull");
     }else{
       //sign in unsuccessfull
@@ -50,7 +53,19 @@ void signInWithEmail(BuildContext context,String email, String password) async{
   }
 }
 
+Future<String> getCurrentUser() async{
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  if(user != null){//if exists a current user, then
+    return user.uid;
+  }else{
+    return null;
+  }
 
+}
+
+void signUserOut(){
+  FirebaseAuth.instance.signOut();
+}
 
 }
 

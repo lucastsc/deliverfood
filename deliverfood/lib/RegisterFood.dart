@@ -60,7 +60,7 @@ class _RegisterFoodState extends State<RegisterFood> {
               String foodName = foodNameController.text;
               String foodDescription = foodDescriptionController.text;
 
-                if(foodNameController.text != "" && foodDescriptionController.text != ""){
+                if(foodName != "" && foodDescription != ""){
                   Firestore.instance.collection("registeredFoods").document(foodName).setData({"name":foodName,"description":foodDescription});
                   helpFunctions().myShowDialog(context, "Alert", "Food registered in Firebase");
                 }
