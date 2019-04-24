@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
 
             RaisedButton(
               color: Colors.blue,
-              child: Text("Sign Up"),
+              child: Text("Sign In"),
               onPressed: (){
                 firebaseHelper().signInWithEmail(context,emailController.text, passwordController.text);
               },

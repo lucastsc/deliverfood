@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'RegisteredFoodsList.dart';
 import 'helper/firebaseHelper.dart';
+import 'helper/helpFunctions.dart';
 
 class RegisterFood extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _RegisterFoodState extends State<RegisterFood> {
 
                 if(foodNameController.text != "" && foodDescriptionController.text != ""){
                   Firestore.instance.collection("registeredFoods").document(foodName).setData({"name":foodName,"description":foodDescription});
-                  firebaseHelper().myShowDialog(context, "Alert", "Food registered in Firebase");
+                  helpFunctions().myShowDialog(context, "Alert", "Food registered in Firebase");
                 }
 
                 setState(() { //refreshes the fields after pressing the register button
