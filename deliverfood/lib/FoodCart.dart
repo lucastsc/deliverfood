@@ -9,13 +9,29 @@ class FoodCart extends StatefulWidget {
 
 class _FoodCartState extends State<FoodCart> {
 
+  // global variable
+  String currentUser;
+
+// -------------- create this method to get the current user
+  Future<Null> _getCurrentUser() async {
+    var result = await firebaseHelper().getCurrentUser();
+
+//we notified that there was a change and that the UI should be rendered
+    setState(() {
+      currentUser = result;
+    });
+  }
+
+// ------------ add this method
+  @override
+  void initState() {
+    this._getCurrentUser();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-
-    String currentUser;
-    firebaseHelper().getCurrentUser().then((result){
-        currentUser = result;
-    });
 
     print(currentUser);
     return Scaffold(
@@ -24,7 +40,8 @@ class _FoodCartState extends State<FoodCart> {
         backgroundColor: Colors.lightBlue,
       ),
       body: StreamBuilder<QuerySnapshot>(//recover data from firebase and shows in the listview
-        stream: Firestore.instance.collection("registeredFoods").snapshots(),
+
+        stream: Firestore.instance.collection(currentUser).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError)
             return new Text('Error: ${snapshot.error}');
@@ -41,7 +58,10 @@ class _FoodCartState extends State<FoodCart> {
       ),
     );
   }
+
 }
+
+
 
 Widget foodCard(String foodName, String foodDescription){
   return Card(
