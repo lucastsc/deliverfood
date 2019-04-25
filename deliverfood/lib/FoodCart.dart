@@ -8,39 +8,44 @@ class FoodCart extends StatefulWidget {
 }
 
 class _FoodCartState extends State<FoodCart> {
-
-  // global variable
+// global variable
   String currentUser;
 
 // -------------- create this method to get the current user
   Future<Null> _getCurrentUser() async {
     var result = await firebaseHelper().getCurrentUser();
 
-//we notified that there was a change and that the UI should be rendered
+    //we notified that there was a change and that the UI should be rendered
     setState(() {
       currentUser = result;
     });
   }
 
-// ------------ add this method
+  // ------------ add this method
   @override
   void initState() {
     this._getCurrentUser();
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
 
-    print(currentUser);
     return Scaffold(
       appBar: AppBar(
         title: Text("FoodCart"),
         backgroundColor: Colors.lightBlue,
       ),
-      body: StreamBuilder<QuerySnapshot>(//recover data from firebase and shows in the listview
+      body: this.buildBody(),
+    );
+  }
 
+  // Add this method
+  Widget buildBody() {
+    if (this.currentUser == null) {
+      return Container();
+    } else {
+      return StreamBuilder<QuerySnapshot>(//recover data from firebase and shows in the listview
         stream: Firestore.instance.collection(currentUser).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError)
@@ -55,12 +60,10 @@ class _FoodCartState extends State<FoodCart> {
               );
           }
         },
-      ),
-    );
+      );
+    }
   }
-
 }
-
 
 
 Widget foodCard(String foodName, String foodDescription){
@@ -94,11 +97,11 @@ Widget foodCard(String foodName, String foodDescription){
 
                 RaisedButton(
                   color: Colors.lightBlue,
-                  child: Text("Order"),
+                  child: Text("Remove"),
                   onPressed: (){
                     print(foodName);
                     firebaseHelper().getCurrentUser().then((result){
-                      Firestore.instance.collection(result).document(foodName).setData({"name":foodName,"description":foodDescription});
+                      Firestore.instance.collection(result).document(foodName).delete();
                     });
                   },
                 ),
