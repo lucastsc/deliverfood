@@ -60,7 +60,6 @@ Future<String> getCurrentUser() async{
   }else{
     return null;
   }
-
 }
 
 void signUserOut(){

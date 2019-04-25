@@ -1,31 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:deliverfood/FoodCart.dart';
+import 'package:deliverfood/helper/firebaseHelper.dart';
 import 'package:flutter/material.dart';
-import 'helper/firebaseHelper.dart';
 
-class RegisteredFoodsList extends StatefulWidget {
+class FoodCart extends StatefulWidget {
   @override
-  _RegisteredFoodsListState createState() => _RegisteredFoodsListState();
+  _FoodCartState createState() => _FoodCartState();
 }
 
-class _RegisteredFoodsListState extends State<RegisteredFoodsList> {
+class _FoodCartState extends State<FoodCart> {
+
   @override
   Widget build(BuildContext context) {
+
+    String currentUser;
+    firebaseHelper().getCurrentUser().then((result){
+        currentUser = result;
+    });
+
+    print(currentUser);
     return Scaffold(
       appBar: AppBar(
-        title: Text("RegisteredFoodsList"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FoodCart()));
-            },
-          )
-        ],
+        title: Text("FoodCart"),
+        backgroundColor: Colors.lightBlue,
       ),
-
       body: StreamBuilder<QuerySnapshot>(//recover data from firebase and shows in the listview
-        stream: Firestore.instance.collection('registeredFoods').snapshots(),
+        stream: Firestore.instance.collection("registeredFoods").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError)
             return new Text('Error: ${snapshot.error}');
@@ -39,12 +38,9 @@ class _RegisteredFoodsListState extends State<RegisteredFoodsList> {
               );
           }
         },
-      )
-
+      ),
     );
   }
-
-
 }
 
 Widget foodCard(String foodName, String foodDescription){
@@ -96,4 +92,3 @@ Widget foodCard(String foodName, String foodDescription){
       )
   );
 }
-
