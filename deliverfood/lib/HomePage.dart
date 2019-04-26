@@ -30,13 +30,6 @@ class _HomePageState extends State<HomePage> {
             },
           ),
 
-          IconButton(
-            icon: Icon(Icons.person_add),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-            },
-          ),
-
         ],
       ),
       body: Container(
