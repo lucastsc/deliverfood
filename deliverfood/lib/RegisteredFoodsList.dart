@@ -79,15 +79,13 @@ Widget foodCard(String foodName, String foodDescription){
 
                 RaisedButton(
                   color: Colors.lightBlue,
-                  child: Text("Order"),
+                  child: Text("Add to cart"),
                   onPressed: (){
 
                     Product food = Product(foodName, foodDescription);
-
                     firebaseHelper().getCurrentUser().then((result){
                       /*Firestore.instance.collection(result).document(foodName).setData({"name":foodName,"description":foodDescription});*/
                       Firestore.instance.collection("users").document(result).collection("cart").add(food.toMap());
-
 
                     });
                   },

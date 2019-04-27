@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:deliverfood/OrderedFoodList.dart';
 import 'package:deliverfood/helper/firebaseHelper.dart';
 import 'package:flutter/material.dart';
 
-class FoodCart extends StatefulWidget {
+class OrderedFoodList extends StatefulWidget {
   @override
-  _FoodCartState createState() => _FoodCartState();
+  _OrderedFoodListState createState() => _OrderedFoodListState();
 }
 
-class _FoodCartState extends State<FoodCart> {
-// global variable
+class _OrderedFoodListState extends State<OrderedFoodList> {
+  // global variable
   String currentUser;
 
 // -------------- create this method to get the current user
@@ -36,25 +35,6 @@ class _FoodCartState extends State<FoodCart> {
       appBar: AppBar(
         title: Text("FoodCart"),
         backgroundColor: Colors.lightBlue,
-        actions: <Widget>[
-          GestureDetector(
-            onTap: (){
-              //Firestore.instance.collection("restaurants").document("restaurant#1").collection("cartRequests").add(data);
-              Firestore.instance.collection("users").document(currentUser).collection("cart").getDocuments().then((resultado){
-                resultado.documents.forEach((doc){
-                  
-                });
-              });
-
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => OrderedFoodList()));
-            },
-            child: Align(
-              alignment: Alignment.center,
-              child: Text("Order now", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-            ),
-          )
-
-        ],
       ),
       body: this.buildBody(),
     );
@@ -115,18 +95,22 @@ Widget foodCard(String foodName, String foodDescription,String documentID){
                   ),
                 ),
 
-                RaisedButton(
+                /*RaisedButton(
                   color: Colors.lightBlue,
                   child: Text("Remove"),
                   onPressed: (){
                     print(foodName);
                     firebaseHelper().getCurrentUser().then((result){
-                      /*Firestore.instance.collection(result).document(foodName).delete();*/
+                      *//*Firestore.instance.collection(result).document(foodName).delete();*//*
                       Firestore.instance.collection("users").document(result).collection("cart").document(documentID).delete();
 
                     });
                   },
-                ),
+                ),*/
+
+                Center(
+                  child: CircularProgressIndicator(),
+                )
 
               ],
             ),

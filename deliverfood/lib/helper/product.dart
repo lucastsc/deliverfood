@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 class Product{
   String name;
   String description;
-  String cid;//product documentID on firebase
 
   /*constructor*/
   Product(String name, String description){
@@ -16,4 +15,5 @@ class Product{
       "description":description
     };
   }
+
 }
