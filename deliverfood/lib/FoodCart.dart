@@ -46,7 +46,7 @@ class _FoodCartState extends State<FoodCart> {
       return Container();
     } else {
       return StreamBuilder<QuerySnapshot>(//recover data from firebase and shows in the listview
-        stream: Firestore.instance.collection(currentUser).snapshots(),
+        stream: /*Firestore.instance.collection(currentUser).snapshots()*/ Firestore.instance.collection("users").document(currentUser).collection("cart").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError)
             return new Text('Error: ${snapshot.error}');
@@ -55,7 +55,7 @@ class _FoodCartState extends State<FoodCart> {
             default:
               return new ListView(
                 children: snapshot.data.documents.map((DocumentSnapshot document) {
-                  return foodCard(document['name'],document['description']);
+                  return foodCard(document['name'],document['description'],document.documentID);
                 }).toList(),
               );
           }
@@ -66,7 +66,7 @@ class _FoodCartState extends State<FoodCart> {
 }
 
 
-Widget foodCard(String foodName, String foodDescription){
+Widget foodCard(String foodName, String foodDescription,String documentID){
   return Card(
 
       child: Row(
@@ -101,7 +101,9 @@ Widget foodCard(String foodName, String foodDescription){
                   onPressed: (){
                     print(foodName);
                     firebaseHelper().getCurrentUser().then((result){
-                      Firestore.instance.collection(result).document(foodName).delete();
+                      /*Firestore.instance.collection(result).document(foodName).delete();*/
+                      Firestore.instance.collection("users").document(result).collection("cart").document(documentID).delete();
+
                     });
                   },
                 ),

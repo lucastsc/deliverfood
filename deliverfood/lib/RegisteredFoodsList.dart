@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deliverfood/FoodCart.dart';
+import 'package:deliverfood/helper/product.dart';
 import 'package:flutter/material.dart';
 import 'helper/firebaseHelper.dart';
 
@@ -80,9 +81,14 @@ Widget foodCard(String foodName, String foodDescription){
                   color: Colors.lightBlue,
                   child: Text("Order"),
                   onPressed: (){
-                    print(foodName);
+
+                    Product food = Product(foodName, foodDescription);
+
                     firebaseHelper().getCurrentUser().then((result){
-                      Firestore.instance.collection(result).document(foodName).setData({"name":foodName,"description":foodDescription});
+                      /*Firestore.instance.collection(result).document(foodName).setData({"name":foodName,"description":foodDescription});*/
+                      Firestore.instance.collection("users").document(result).collection("cart").add(food.toMap());
+
+
                     });
                   },
                 ),
